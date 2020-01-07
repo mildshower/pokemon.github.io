@@ -34,8 +34,8 @@ const openNav = function(pokBox) {
   detailSlide.innerHTML = `<a id="closeBtn" onclick="closeNav()">close</a>`;
   detailSlide.innerHTML += `<h1>${name}</h1>`;
   detailSlide.innerHTML += `<img src="${img}"></img>`;
-  detailSlide.innerHTML += `<p style="padding: 0 20vw">${description}</p>`;
-  document.getElementsByClassName('detail')[0].style.width = '85%';
+  detailSlide.innerHTML += `<p style="padding: 0 8vw">${description}</p>`;
+  document.getElementsByClassName('detail')[0].style.width = '45%';
   // document.getElementsByTagName('body')[0].style.opacity = '0.5';
 };
 
