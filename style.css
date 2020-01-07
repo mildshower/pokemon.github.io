@@ -187,4 +187,8 @@ nav div#all {
   .type {
     font-size: 2vw;
   }
+
+  nav div {
+    font-size: 3vw;
+  }
 }
