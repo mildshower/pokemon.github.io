@@ -75,6 +75,101 @@
   margin-right: 2px;
 }
 
+.type .bug {
+  background: rgb(146, 217, 57);
+}
+
+.type .dragon {
+  background: rgb(0, 67, 164);
+}
+
+.type .electric {
+  background: rgb(255, 255, 0);
+}
+
+.type .fairy {
+  background: rgb(255, 131, 255);
+}
+
+.type .fighting {
+  background: rgb(146, 57, 77);
+}
+
+.type .fire {
+  background: rgb(220, 138, 0);
+}
+
+.type .flying {
+  background: rgb(102, 169, 233);
+}
+
+.type .ghost {
+  background: rgb(77, 77, 164);
+}
+
+.type .grass {
+  background: rgb(0, 170, 0);
+}
+
+.type .ground {
+  background: rgb(159, 95, 0);
+}
+
+.type .ice {
+  background: rgb(159, 212, 210);
+}
+
+.type .normal {
+  background: rgb(179, 179, 179);
+}
+
+.type .poison {
+  background: rgb(120, 0, 164);
+}
+
+.type .psychic {
+  background: rgb(243, 85, 115);
+}
+
+.type .rock {
+  background: rgb(133, 125, 80);
+}
+
+.type .steel {
+  background: rgb(23, 125, 138);
+}
+
+.type .water {
+  background: rgb(23, 125, 220);
+}
+
+nav {
+  overflow-x: scroll;
+  display: flex;
+  padding-bottom: 0vw;
+  margin: 1vw;
+  padding-top: 2vw;
+  border-bottom: 4px solid rgb(199, 199, 199);
+}
+
+nav::-webkit-scrollbar {
+  appearance: none;
+}
+
+nav div {
+  color: rgb(107, 107, 107);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.3vw;
+  font-weight: 200;
+  margin: 0 1vw;
+}
+
+nav div#all {
+  color: rgb(63, 63, 63);
+  font-weight: 800;
+}
+
 @media (max-width: 600px) {
   .pokemon {
     width: 30vw;
