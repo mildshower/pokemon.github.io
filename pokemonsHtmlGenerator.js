@@ -3,9 +3,12 @@ const few = all.slice(0, 5);
 
 let details = '';
 all.forEach(pok => {
-  details += `<div class="pokemon ${pok.types.join(' ')}">\n`;
+  details += `<div onclick="openNav(this)" class="pokemon ${pok.types.join(
+    ' '
+  )}">\n`;
   details += `\t<h4>${pok.name}</h4>\n`;
   details += `\t<img src="${pok.art_url}" alt="${pok.name}">\n`;
+  details += `\t<p>${pok.description}</p>`;
   details += `\t<div class="typesContainer">\n`;
   pok.types.forEach(type => {
     details += `\t\t<div class="type">\n`;

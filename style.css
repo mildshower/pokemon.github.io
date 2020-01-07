@@ -18,6 +18,10 @@
   overflow: hidden;
 }
 
+.pokemon > p {
+  display: none;
+}
+
 .pokemon:hover {
   background-color: white;
   box-shadow: 0px 0px 5px 4px rgba(128, 128, 128, 0.8);
@@ -170,6 +174,50 @@ nav div#all {
   font-weight: 800;
 }
 
+.detail {
+  text-align: center;
+  height: 100%;
+  width: 0%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  transition: 0.3s;
+  padding-top: 5vw;
+  color: white;
+}
+
+.detail::-webkit-scrollbar {
+  appearance: none;
+}
+
+.detail img {
+  width: 35%;
+}
+
+.detail a {
+  color: black;
+}
+
+.detail p {
+  line-height: 2vw;
+  text-align: justify;
+  font-size: 1.3vw;
+}
+
+#closeBtn {
+  font-weight: 800;
+  top: 5vh;
+  right: 5vh;
+  position: absolute;
+  background: white;
+  padding: 2px 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .pokemon {
     width: 30vw;
@@ -189,6 +237,11 @@ nav div#all {
   }
 
   nav div {
+    font-size: 3vw;
+  }
+
+  .detail p {
+    line-height: 4vw;
     font-size: 3vw;
   }
 }
