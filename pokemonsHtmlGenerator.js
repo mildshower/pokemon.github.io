@@ -8,7 +8,7 @@ all.forEach(pok => {
   )}">\n`;
   details += `\t<h4>${pok.name}</h4>\n`;
   details += `\t<img src="${pok.art_url}" alt="${pok.name}">\n`;
-  details += `\t<p>${pok.description}</p>`;
+  details += `\t<p>${pok.description}</p>\n`;
   details += `\t<div class="typesContainer">\n`;
   pok.types.forEach(type => {
     details += `\t\t<div class="type">\n`;
