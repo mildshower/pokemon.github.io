@@ -53,7 +53,7 @@ const search = function() {
 };
 
 let bodyTop = 0;
-window.onwheel = function() {
+window.onscroll = function() {
   const top = document.body.getBoundingClientRect().top;
   if (top > bodyTop) {
     document.getElementsByClassName('categoryPanel')[0].style.position =
