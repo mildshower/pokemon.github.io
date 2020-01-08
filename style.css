@@ -153,7 +153,8 @@ nav {
   overflow-x: scroll;
   display: flex;
   padding-top: 1vw;
-  border-right: 1px solid rgb(201, 201, 201);
+  border-right: 1px solid rgb(224, 224, 224);
+  box-shadow: inset -8px 0px 6px -6px rgb(224, 224, 224);
 }
 
 .categoryPanel {
@@ -176,7 +177,7 @@ nav {
   outline: none;
   color: rgb(221, 221, 221);
   height: 20px;
-  border: 1px solid rgb(221, 221, 221);
+  border: 1px solid rgb(211, 211, 211);
 }
 
 #searchBar::placeholder {
