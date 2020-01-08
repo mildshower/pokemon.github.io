@@ -3,7 +3,7 @@ const few = all.slice(0, 5);
 
 let details = '';
 all.forEach(pok => {
-  details += `<div onmouseover="writeOnNav(this)" onclick="openNav(this)" class="pokemon ${pok.types.join(
+  details += `<div onmouseover="writeOnDetailSlide(this)" onclick="openNav(this)" class="pokemon ${pok.types.join(
     ' '
   )}" id="${pok.name.toLowerCase()}">\n`;
   details += `\t<h4>${pok.name}</h4>\n`;

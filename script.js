@@ -1,70 +1,112 @@
-let currCategory = document.getElementById('all');
-const fade = element => {
-  element.style['font-weight'] = '200';
-  element.style.color = 'rgb(107, 107, 107)';
-};
-const highlight = function(element) {
-  element.style.color = 'rgb(63, 63, 63)';
-  element.style['font-weight'] = '800';
-};
-
-const show = element => (element.style.display = 'block');
-const hide = element => (element.style.display = 'none');
-
-const filter = function(categoryElement) {
-  Array.from(document.getElementsByClassName('category')).forEach(fade);
-  [categoryElement].forEach(highlight);
-
-  let type = categoryElement.innerText.toLowerCase();
-  if (type === 'all') type = 'pokemon';
-  const allPokemon = document.getElementsByClassName('pokemon');
-  const pokemonElements = Array.from(allPokemon);
-  pokemonElements.forEach(hide);
-  const thisType = pokemonElements.filter(
-    pokBox =>
-      pokBox.className.includes(type) &&
-      pokBox.id.includes(searchBar.value.toLowerCase())
-  );
-  Array.from(thisType).forEach(show);
-  currCategory = categoryElement;
-};
-
-const writeOnNav = function(pokBox) {
-  const img = pokBox.childNodes[3].src;
-  const description = pokBox.childNodes[5].innerText;
-  const name = pokBox.childNodes[1].innerText;
-  const detailSlide = document.getElementsByClassName('detail')[0];
-  detailSlide.innerHTML = `<a id="closeBtn" onclick="closeNav()">close</a>`;
-  detailSlide.innerHTML += `<h1>${name}</h1>`;
-  detailSlide.innerHTML += `<img src="${img}"></img>`;
-  detailSlide.innerHTML += `<p style="padding: 0 8vw">${description}</p>`;
-};
-
 const openNav = function() {
-  document.getElementsByClassName('detail')[0].style.width = '45%';
+  const navElement = document.getElementsByClassName('detail')[0];
+  navElement.style.width = '45%';
 };
 
 const closeNav = function() {
-  document.getElementsByClassName('detail')[0].style.width = '0%';
+  const navElement = document.getElementsByClassName('detail')[0];
+  navElement.style.width = '0%';
 };
 
 window.onkeydown = function(){
   if(event.keyCode === 27) closeNav();
 }
 
-const search = function() {
-  filter(currCategory);
+const fade = element => {
+  element.style['font-weight'] = '200';
+  element.style.color = 'rgb(107, 107, 107)';
 };
 
-let bodyTop = 0;
-window.onscroll = function() {
-  const top = document.body.getBoundingClientRect().top;
-  if (top > bodyTop) {
-    document.getElementsByClassName('categoryPanel')[0].style.position =
-      'sticky';
-  } else {
-    document.getElementsByClassName('categoryPanel')[0].style.position =
-      'static';
-  }
-  bodyTop = top;
+const highlight = function(element) {
+  element.style.color = 'rgb(63, 63, 63)';
+  element.style['font-weight'] = '800';
 };
+
+const show = element => (element.style.display = 'block');
+
+const hide = element => (element.style.display = 'none');
+
+const getAllPokeBoxes = function() {
+  const allPokemon = document.getElementsByClassName('pokemon');
+  return Array.from(allPokemon);
+}
+
+const isAMatch = function(selectedType, searchKeyword, pokeBox) {
+  const isSelectedType = pokeBox.className.includes(selectedType);
+  const doesKeywordMatch = pokeBox.id.includes(searchKeyword.toLowerCase());
+  return isSelectedType && doesKeywordMatch;
+}
+
+class PokeCollection {
+  constructor() {
+    this.currCategory = document.getElementById('all');
+  }
+
+  focusOnSelectedType(selectedCategoryElement){
+    fade(this.currCategory);
+    highlight(selectedCategoryElement);
+  }
+
+  filter(selectedCategoryElement) {
+    this.focusOnSelectedType(selectedCategoryElement);
+    const allPokeBoxes = getAllPokeBoxes();
+
+    let type = selectedCategoryElement.innerText.toLowerCase();
+    if (type === 'all') type = 'pokemon';
+    const matcher = isAMatch.bind(null,type,searchBar.value);
+    const matchedPokeBoxes = Array.from(allPokeBoxes.filter(matcher));
+
+    allPokeBoxes.forEach(hide);
+    matchedPokeBoxes.forEach(show);
+    this.currCategory = selectedCategoryElement;
+  }
+
+  search() {
+    this.filter(this.currCategory);
+  };
+}
+
+const showCategoryPanel = function() {
+  const categoryPanel = document.getElementsByClassName('categoryPanel')[0];
+  categoryPanel.style.position = 'sticky';
+}
+
+const hideCategoryPanel = function() {
+  const categoryPanel = document.getElementsByClassName('categoryPanel')[0];
+  categoryPanel.style.position = 'static';
+}
+
+class ScrollListener {
+  constructor(actionOnScrollUp, actionOnScrollDown) {
+    this.bodyTop = 0;
+    this.actionOnScrollUp = actionOnScrollUp;
+    this.actionOnScrollDown = actionOnScrollDown;
+  }
+
+  listen() {
+    const currBodyTop = document.body.getBoundingClientRect().top;
+    if (currBodyTop > this.bodyTop) this.actionOnScrollUp();
+    else this.actionOnScrollDown();
+    this.bodyTop = currBodyTop;
+  }
+}
+
+const structureDetails = function(name, imgSrc, description) {
+  let htmlContent = `<a id="closeBtn" onclick="closeNav()">close</a>`;
+  htmlContent += `<h1>${name}</h1>`;
+  htmlContent += `<img src="${imgSrc}"></img>`;
+  htmlContent += `<p style="padding: 0 8vw">${description}</p>`;
+  return htmlContent;
+}
+
+const writeOnDetailSlide = function(pokBox) {
+  const imgSrc = pokBox.childNodes[3].src;
+  const description = pokBox.childNodes[5].innerText;
+  const name = pokBox.childNodes[1].innerText;
+  const detailSlide = document.getElementsByClassName('detail')[0];
+  detailSlide.innerHTML = structureDetails(name, imgSrc, description);
+};
+
+const pokeCollection = new PokeCollection();
+const scrollListener = new ScrollListener(showCategoryPanel, hideCategoryPanel);
+window.onscroll = () => scrollListener.listen();
