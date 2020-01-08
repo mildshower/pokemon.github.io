@@ -29,8 +29,7 @@ const filter = function(categoryElement) {
   currCategory = categoryElement;
 };
 
-const openNav = function(pokBox) {
-  console.log(pokBox.childNodes);
+const writeOnNav = function(pokBox) {
   const img = pokBox.childNodes[3].src;
   const description = pokBox.childNodes[5].innerText;
   const name = pokBox.childNodes[1].innerText;
@@ -39,13 +38,14 @@ const openNav = function(pokBox) {
   detailSlide.innerHTML += `<h1>${name}</h1>`;
   detailSlide.innerHTML += `<img src="${img}"></img>`;
   detailSlide.innerHTML += `<p style="padding: 0 8vw">${description}</p>`;
+};
+
+const openNav = function(pokBox) {
   document.getElementsByClassName('detail')[0].style.width = '45%';
-  // document.getElementsByTagName('body')[0].style.opacity = '0.5';
 };
 
 const closeNav = function() {
   document.getElementsByClassName('detail')[0].style.width = '0%';
-  // document.getElementsByTagName('body')[0].style.opacity = '1';
 };
 
 const search = function() {
@@ -58,11 +58,9 @@ window.onscroll = function() {
   if (top > bodyTop) {
     document.getElementsByClassName('categoryPanel')[0].style.position =
       'sticky';
-    console.log('up');
   } else {
     document.getElementsByClassName('categoryPanel')[0].style.position =
       'static';
-    console.log('down');
   }
   bodyTop = top;
 };
