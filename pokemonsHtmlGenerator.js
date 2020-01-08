@@ -12,7 +12,7 @@ all.forEach(pok => {
   details += `\t<div class="typesContainer">\n`;
   pok.types.forEach(type => {
     details += `\t\t<div class="type">\n`;
-    details += `\t\t\t<img src="./image/${type}.png" class="typeImg"></img>\n`;
+    details += `\t\t\t<img src="./Image/${type}.png" class="typeImg"></img>\n`;
     details += `\t\t\t<span>${type[0].toUpperCase() + type.slice(1)}</span>\n`;
     details += `\t\t</div>\n`;
   });
