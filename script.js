@@ -51,3 +51,18 @@ const closeNav = function() {
 const search = function() {
   filter(currCategory);
 };
+
+let bodyTop = 0;
+window.onwheel = function() {
+  const top = document.body.getBoundingClientRect().top;
+  if (top > bodyTop) {
+    document.getElementsByClassName('categoryPanel')[0].style.position =
+      'sticky';
+    console.log('up');
+  } else {
+    document.getElementsByClassName('categoryPanel')[0].style.position =
+      'static';
+    console.log('down');
+  }
+  bodyTop = top;
+};
