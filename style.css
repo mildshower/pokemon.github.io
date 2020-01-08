@@ -149,14 +149,44 @@
 }
 
 nav {
-  z-index: 1;
+  width: 85%;
   overflow-x: scroll;
   display: flex;
-  padding-top: 2vw;
+  padding-top: 1vw;
+  border-right: 1px solid rgb(201, 201, 201);
+}
+
+.categoryPanel {
+  background: white;
+  padding-top: 1vw;
+  align-items: center;
   border-bottom: 1px solid rgb(199, 199, 199);
   position: sticky;
   top: 0;
-  background: white;
+  z-index: 1;
+  display: flex;
+}
+
+#searchBar {
+  border-radius: 300px;
+  margin: 0 1vw;
+  flex-grow: 1;
+  font-size: 1.3vw;
+  padding: 1.2vw;
+  outline: none;
+  color: rgb(221, 221, 221);
+  height: 20px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+#searchBar::placeholder {
+  color: rgb(221, 221, 221);
+}
+
+#searchBar:focus,
+#searchBar:hover {
+  color: gray;
+  border: 1px solid gray;
 }
 
 nav::-webkit-scrollbar {

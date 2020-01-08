@@ -1,28 +1,32 @@
-const filter = function(category) {
-  highlight(category);
-  const type = category.innerText.toLowerCase();
-  const allPokemons = document.getElementsByClassName('pokemon');
-  Array.from(allPokemons).forEach(pokBox => (pokBox.style.display = 'none'));
-  const thisType = Array.from(allPokemons).filter(pokBox =>
-    pokBox.className.includes(type)
+let currCategory = document.getElementById('all');
+const fade = element => {
+  element.style['font-weight'] = '200';
+  element.style.color = 'rgb(107, 107, 107)';
+};
+const highlight = function(element) {
+  element.style.color = 'rgb(63, 63, 63)';
+  element.style['font-weight'] = '800';
+};
+
+const show = element => (element.style.display = 'block');
+const hide = element => (element.style.display = 'none');
+
+const filter = function(categoryElement) {
+  Array.from(document.getElementsByClassName('category')).forEach(fade);
+  [categoryElement].forEach(highlight);
+
+  let type = categoryElement.innerText.toLowerCase();
+  if (type === 'all') type = 'pokemon';
+  const allPokemon = document.getElementsByClassName('pokemon');
+  const pokemonElements = Array.from(allPokemon);
+  pokemonElements.forEach(hide);
+  const thisType = pokemonElements.filter(
+    pokBox =>
+      pokBox.className.includes(type) &&
+      pokBox.id.includes(searchBar.value.toLowerCase())
   );
-  Array.from(thisType).forEach(pokBox => (pokBox.style.display = 'block'));
-};
-
-const showAll = function(allTag) {
-  highlight(allTag);
-  const allPokemons = document.getElementsByClassName('pokemon');
-  Array.from(allPokemons).forEach(pokBox => (pokBox.style.display = 'block'));
-};
-
-const highlight = function(menu) {
-  const allMenuItems = document.getElementsByClassName('category');
-  Array.from(allMenuItems).forEach(menuItem => {
-    menuItem.style['font-weight'] = '200';
-    menuItem.style.color = 'rgb(107, 107, 107)';
-  });
-  menu.style.color = 'rgb(63, 63, 63)';
-  menu.style['font-weight'] = '800';
+  Array.from(thisType).forEach(show);
+  currCategory = categoryElement;
 };
 
 const openNav = function(pokBox) {
@@ -42,4 +46,8 @@ const openNav = function(pokBox) {
 const closeNav = function() {
   document.getElementsByClassName('detail')[0].style.width = '0%';
   // document.getElementsByTagName('body')[0].style.opacity = '1';
+};
+
+const search = function() {
+  filter(currCategory);
 };

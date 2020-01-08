@@ -5,7 +5,7 @@ let details = '';
 all.forEach(pok => {
   details += `<div onclick="openNav(this)" class="pokemon ${pok.types.join(
     ' '
-  )}">\n`;
+  )}" id="${pok.name.toLowerCase()}">\n`;
   details += `\t<h4>${pok.name}</h4>\n`;
   details += `\t<img src="${pok.art_url}" alt="${pok.name}">\n`;
   details += `\t<p>${pok.description}</p>\n`;
