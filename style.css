@@ -73,79 +73,9 @@
   font-size: 1vw;
 }
 
-.type > div {
-  height: 1vw;
-  width: 1vw;
-  border-radius: 1000px;
-  margin-right: 2px;
-}
-
-.type .bug {
-  background: rgb(146, 217, 57);
-}
-
-.type .dragon {
-  background: rgb(0, 67, 164);
-}
-
-.type .electric {
-  background: rgb(255, 255, 0);
-}
-
-.type .fairy {
-  background: rgb(255, 131, 255);
-}
-
-.type .fighting {
-  background: rgb(146, 57, 77);
-}
-
-.type .fire {
-  background: rgb(220, 138, 0);
-}
-
-.type .flying {
-  background: rgb(102, 169, 233);
-}
-
-.type .ghost {
-  background: rgb(77, 77, 164);
-}
-
-.type .grass {
-  background: rgb(0, 170, 0);
-}
-
-.type .ground {
-  background: rgb(159, 95, 0);
-}
-
-.type .ice {
-  background: rgb(159, 212, 210);
-}
-
-.type .normal {
-  background: rgb(179, 179, 179);
-}
-
-.type .poison {
-  background: rgb(120, 0, 164);
-}
-
-.type .psychic {
-  background: rgb(243, 85, 115);
-}
-
-.type .rock {
-  background: rgb(133, 125, 80);
-}
-
-.type .steel {
-  background: rgb(23, 125, 138);
-}
-
-.type .water {
-  background: rgb(23, 125, 220);
+.typeImg {
+  height: 15px;
+  margin-right: 0.2vw;
 }
 
 nav {
@@ -288,5 +218,14 @@ nav div#all {
     height: 4vw;
     flex-grow: 0;
     overflow: hidden;
+  }
+
+  .typeImg{
+    width: 15px;
+    margin: 0 0;
+  }
+
+  .type span {
+    display: none;
   }
 }

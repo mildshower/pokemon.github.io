@@ -40,13 +40,17 @@ const writeOnNav = function(pokBox) {
   detailSlide.innerHTML += `<p style="padding: 0 8vw">${description}</p>`;
 };
 
-const openNav = function(pokBox) {
+const openNav = function() {
   document.getElementsByClassName('detail')[0].style.width = '45%';
 };
 
 const closeNav = function() {
   document.getElementsByClassName('detail')[0].style.width = '0%';
 };
+
+window.onkeydown = function(){
+  if(event.keyCode === 27) closeNav();
+}
 
 const search = function() {
   filter(currCategory);
