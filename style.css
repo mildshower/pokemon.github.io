@@ -24,6 +24,25 @@
   overflow: hidden;
 }
 
+.pokemon > img {
+  padding: 0% 10%;
+  width: 80%;
+  height: auto;
+}
+
+.pokemon > h4 {
+  font-size: 1.2vw;
+  text-align: center;
+  padding-top: 1.2vw;
+  padding-bottom: 1.2vw;
+  margin-top: 0;
+  margin-bottom: 1vw;
+  border-bottom: 0.5px solid rgb(216, 216, 216);
+  color: rgb(88, 88, 88);
+  background-image: linear-gradient(#ffffff, #f9f9f9);
+  font-weight: 400;
+}
+
 .pokemon > p {
   display: none;
 }
@@ -41,25 +60,6 @@
 
 .pokemon:hover > h4 {
   color: black;
-}
-
-.pokemon > h4 {
-  font-size: 1.2vw;
-  text-align: center;
-  padding-top: 1.2vw;
-  padding-bottom: 1.2vw;
-  margin-top: 0;
-  margin-bottom: 1vw;
-  border-bottom: 0.5px solid rgb(216, 216, 216);
-  color: rgb(88, 88, 88);
-  background-image: linear-gradient(#ffffff, #f9f9f9);
-  font-weight: 400;
-}
-
-.pokemon > img {
-  padding: 0% 10%;
-  width: 80%;
-  height: auto;
 }
 
 .typesContainer {
@@ -85,15 +85,6 @@
   margin-right: 0.2vw;
 }
 
-nav {
-  width: 85%;
-  overflow-x: scroll;
-  display: flex;
-  padding-top: 1vw;
-  border-right: 1px solid rgb(224, 224, 224);
-  box-shadow: inset -8px 0px 6px -6px rgb(224, 224, 224);
-}
-
 .categoryPanel {
   background: white;
   padding-top: 1vw;
@@ -105,34 +96,13 @@ nav {
   display: flex;
 }
 
-#searchBar {
-  border-radius: 300px;
-  margin: 0 1vw;
-  flex-grow: 1;
-  font-size: 1.3vw;
-  padding: 1.2vw;
-  outline: none;
-  color: rgb(221, 221, 221);
-  height: 2vw;
-  border: 1px solid rgb(211, 211, 211);
-}
-
-.hidden{
-  display: none;
-}
-
-#searchBar::placeholder {
-  color: rgb(221, 221, 221);
-}
-
-#searchBar:focus,
-#searchBar:hover {
-  color: gray;
-  border: 1px solid gray;
-}
-
-nav::-webkit-scrollbar {
-  appearance: none;
+nav {
+  width: 85%;
+  overflow-x: scroll;
+  display: flex;
+  padding-top: 1vw;
+  border-right: 1px solid rgb(224, 224, 224);
+  box-shadow: inset -8px 0px 6px -6px rgb(224, 224, 224);
 }
 
 nav div {
@@ -147,6 +117,32 @@ nav div {
 nav div#all {
   color: rgb(63, 63, 63);
   font-weight: 800;
+}
+
+nav::-webkit-scrollbar {
+  appearance: none;
+}
+
+#searchBar {
+  border-radius: 300px;
+  margin: 0 1vw;
+  flex-grow: 1;
+  font-size: 1.3vw;
+  padding: 1.2vw;
+  outline: none;
+  color: rgb(221, 221, 221);
+  height: 2vw;
+  border: 1px solid rgb(211, 211, 211);
+}
+
+#searchBar::placeholder {
+  color: rgb(221, 221, 221);
+}
+
+#searchBar:focus,
+#searchBar:hover {
+  color: gray;
+  border: 1px solid gray;
 }
 
 .detail {
@@ -164,10 +160,6 @@ nav div#all {
   color: rgb(255, 255, 255);
 }
 
-.detail::-webkit-scrollbar {
-  appearance: none;
-}
-
 .detail img {
   width: 35%;
 }
@@ -182,6 +174,10 @@ nav div#all {
   font-size: 1.3vw;
 }
 
+.detail::-webkit-scrollbar {
+  appearance: none;
+}
+
 #closeBtn {
   font-weight: 800;
   top: 3vw;
@@ -191,6 +187,10 @@ nav div#all {
   padding: 2px 5px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.hidden{
+  display: none;
 }
 
 @media (max-width: 600px) {

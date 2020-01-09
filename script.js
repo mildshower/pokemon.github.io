@@ -52,8 +52,8 @@ class PokeCollection {
     const matcher = isAMatch.bind(null,type,searchBar.value);
     const matchedPokeBoxes = Array.from(allPokeBoxes.filter(matcher));
 
-    allPokeBoxes.forEach(e=>e.classList.add('hidden'));
-    matchedPokeBoxes.forEach(e=>e.classList.remove('hidden'));
+    allPokeBoxes.forEach(element=>element.classList.add('hidden'));
+    matchedPokeBoxes.forEach(element=>element.classList.remove('hidden'));
     this.currCategory = selectedCategoryElement;
   }
 
