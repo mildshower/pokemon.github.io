@@ -22,10 +22,6 @@ const highlight = function(element) {
   element.style['font-weight'] = '800';
 };
 
-const show = element => (element.style.display = 'block');
-
-const hide = element => (element.style.display = 'none');
-
 const getAllPokeBoxes = function() {
   const allPokemon = document.getElementsByClassName('pokemon');
   return Array.from(allPokemon);
@@ -56,8 +52,8 @@ class PokeCollection {
     const matcher = isAMatch.bind(null,type,searchBar.value);
     const matchedPokeBoxes = Array.from(allPokeBoxes.filter(matcher));
 
-    allPokeBoxes.forEach(hide);
-    matchedPokeBoxes.forEach(show);
+    allPokeBoxes.forEach(e=>e.classList.add('hidden'));
+    matchedPokeBoxes.forEach(e=>e.classList.remove('hidden'));
     this.currCategory = selectedCategoryElement;
   }
 
@@ -91,11 +87,14 @@ class ScrollListener {
   }
 }
 
-const structureDetails = function(name, imgSrc, description) {
-  let htmlContent = `<a id="closeBtn" onclick="closeNav()">close</a>`;
-  htmlContent += `<h1>${name}</h1>`;
-  htmlContent += `<img src="${imgSrc}"></img>`;
-  htmlContent += `<p style="padding: 0 8vw">${description}</p>`;
+const generateAboutDiv = function(name, imgSrc, description) {
+  let htmlContent = 
+  `<div>
+    <a id="closeBtn" onclick="closeNav()">close</a>
+    <h1>${name}</h1>
+    <img src="${imgSrc}"></img>
+    <p style="padding: 0 8vw">${description}</p>
+   </div>`;
   return htmlContent;
 }
 
@@ -104,9 +103,9 @@ const writeOnDetailSlide = function(pokBox) {
   const description = pokBox.childNodes[5].innerText;
   const name = pokBox.childNodes[1].innerText;
   const detailSlide = document.getElementsByClassName('detail')[0];
-  detailSlide.innerHTML = structureDetails(name, imgSrc, description);
+  detailSlide.innerHTML = generateAboutDiv(name, imgSrc, description);
 };
 
-const pokeCollection = new PokeCollection();
 const scrollListener = new ScrollListener(showCategoryPanel, hideCategoryPanel);
 window.onscroll = () => scrollListener.listen();
+const pokeCollection = new PokeCollection();

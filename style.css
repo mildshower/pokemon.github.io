@@ -117,6 +117,10 @@ nav {
   border: 1px solid rgb(211, 211, 211);
 }
 
+.hidden{
+  display: none;
+}
+
 #searchBar::placeholder {
   color: rgb(221, 221, 221);
 }
