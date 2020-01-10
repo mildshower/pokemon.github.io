@@ -1,85 +1,77 @@
-const openNav = function() {
-  const navElement = document.getElementsByClassName('detail')[0];
+const getAllPokeBoxes = function() {
+  const allPokeBoxes = document.getElementsByClassName('pokemon');
+  return Array.from(allPokeBoxes);
+};
+
+const getAboutSection = () => document.getElementsByClassName('detail')[0];
+
+const getCategoryPanel = () =>
+  document.getElementsByClassName('categoryPanel')[0];
+
+const getAllCategoryElements = () => {
+  const allCategoryElements = document.getElementsByClassName('category');
+  return Array.from(allCategoryElements);
+};
+
+const getSearchBar = () => document.getElementById('searchBar');
+
+const openAboutSection = function() {
+  const navElement = getAboutSection();
   navElement.style.width = '45%';
 };
 
-const closeNav = function() {
-  const navElement = document.getElementsByClassName('detail')[0];
+const closeAboutSection = function() {
+  const navElement = getAboutSection();
   navElement.style.width = '0%';
 };
 
-window.onkeydown = function(){
-  if(event.keyCode === 27) closeNav();
-}
-
-const fade = element => {
-  element.style['font-weight'] = '200';
-  element.style.color = 'rgb(107, 107, 107)';
-};
-
-const highlight = function(element) {
-  element.style.color = 'rgb(63, 63, 63)';
-  element.style['font-weight'] = '800';
-};
-
-const getAllPokeBoxes = function() {
-  const allPokemon = document.getElementsByClassName('pokemon');
-  return Array.from(allPokemon);
-}
-
-const isAMatch = function(selectedType, searchKeyword, pokeBox) {
+const doesPokeBoxMatch = function(selectedType, searchKeyword, pokeBox) {
   const isSelectedType = pokeBox.className.includes(selectedType);
   const doesKeywordMatch = pokeBox.id.includes(searchKeyword.toLowerCase());
   return isSelectedType && doesKeywordMatch;
-}
+};
 
 class PokeCollection {
   constructor() {
-    this.currCategory = document.getElementById('all');
+    this.currCategory = document.getElementsByClassName('highlighted')[0];
+    this.searchKeyword = '';
   }
 
-  focusOnSelectedType(selectedCategoryElement){
-    fade(this.currCategory);
-    highlight(selectedCategoryElement);
+  focusOnSelectedType(selectedCategoryElement) {
+    this.currCategory.classList.remove('highlighted');
+    selectedCategoryElement.classList.add('highlighted');
   }
 
-  filter(selectedCategoryElement) {
-    this.focusOnSelectedType(selectedCategoryElement);
-    const allPokeBoxes = getAllPokeBoxes();
-
-    let type = selectedCategoryElement.innerText.toLowerCase();
+  filter() {
+    let type = this.currCategory.innerText.toLowerCase();
     if (type === 'all') type = 'pokemon';
-    const matcher = isAMatch.bind(null,type,searchBar.value);
-    const matchedPokeBoxes = Array.from(allPokeBoxes.filter(matcher));
 
-    allPokeBoxes.forEach(element=>element.classList.add('hidden'));
-    matchedPokeBoxes.forEach(element=>element.classList.remove('hidden'));
-    this.currCategory = selectedCategoryElement;
+    const allPokeBoxes = getAllPokeBoxes();
+    const matcher = doesPokeBoxMatch.bind(null, type, searchBar.value);
+    const matchedPokeBoxes = Array.from(allPokeBoxes.filter(matcher));
+    allPokeBoxes.forEach(element => element.classList.add('hidden'));
+    matchedPokeBoxes.forEach(element => element.classList.remove('hidden'));
   }
 
-  search() {
-    this.filter(this.currCategory);
-  };
-}
+  filterByCategory(selectedCategoryElement) {
+    this.focusOnSelectedType(selectedCategoryElement);
+    this.currCategory = selectedCategoryElement;
+    this.filter();
+  }
 
-const showCategoryPanel = function() {
-  const categoryPanel = document.getElementsByClassName('categoryPanel')[0];
-  categoryPanel.style.position = 'sticky';
+  search(keyword) {
+    this.searchKeyword = keyword;
+    this.filter();
+  }
 }
-
-const hideCategoryPanel = function() {
-  const categoryPanel = document.getElementsByClassName('categoryPanel')[0];
-  categoryPanel.style.position = 'static';
-}
-
-class ScrollListener {
+class handleScroll {
   constructor(actionOnScrollUp, actionOnScrollDown) {
     this.bodyTop = 0;
     this.actionOnScrollUp = actionOnScrollUp;
     this.actionOnScrollDown = actionOnScrollDown;
   }
 
-  listen() {
+  act() {
     const currBodyTop = document.body.getBoundingClientRect().top;
     if (currBodyTop > this.bodyTop) this.actionOnScrollUp();
     else this.actionOnScrollDown();
@@ -87,25 +79,67 @@ class ScrollListener {
   }
 }
 
+const showCategoryPanel = function() {
+  const categoryPanel = getCategoryPanel();
+  categoryPanel.style.position = 'sticky';
+};
+
+const hideCategoryPanel = function() {
+  const categoryPanel = getCategoryPanel();
+  categoryPanel.style.position = 'static';
+};
+
 const generateAboutDiv = function(name, imgSrc, description) {
-  let htmlContent = 
-  `<div>
-    <a id="closeBtn" onclick="closeNav()">close</a>
+  let htmlContent = `<div>
+    <a id="closeBtn" onclick="closeAboutSection()">close</a>
     <h1>${name}</h1>
     <img src="${imgSrc}"></img>
     <p style="padding: 0 8vw">${description}</p>
    </div>`;
   return htmlContent;
-}
+};
 
-const writeOnDetailSlide = function(pokBox) {
+const writeOnAboutSection = function(pokBox) {
   const imgSrc = pokBox.childNodes[3].src;
   const description = pokBox.childNodes[5].innerText;
   const name = pokBox.childNodes[1].innerText;
-  const detailSlide = document.getElementsByClassName('detail')[0];
-  detailSlide.innerHTML = generateAboutDiv(name, imgSrc, description);
+  const aboutSection = getAboutSection();
+  aboutSection.innerHTML = generateAboutDiv(name, imgSrc, description);
 };
 
-const scrollListener = new ScrollListener(showCategoryPanel, hideCategoryPanel);
-window.onscroll = () => scrollListener.listen();
-const pokeCollection = new PokeCollection();
+const hookCategoryListeners = function(pokeCollection) {
+  const allCategoryElements = getAllCategoryElements();
+  allCategoryElements.forEach(
+    element =>
+      (element.onclick = () => pokeCollection.filterByCategory(element))
+  );
+};
+
+const hookPokeBoxListeners = function() {
+  const allPokeBoxes = getAllPokeBoxes();
+  allPokeBoxes.forEach(pokeBox => {
+    pokeBox.onmouseover = writeOnAboutSection.bind(null, pokeBox);
+    pokeBox.onclick = openAboutSection;
+  });
+};
+
+const hookWindowListeners = function(scrollHandler) {
+  window.onscroll = () => scrollHandler.act();
+  window.onkeydown = function() {
+    if (event.keyCode === 27) closeAboutSection();
+  };
+};
+
+const hookSearchListener = function(pokeCollection) {
+  const searchBar = getSearchBar();
+  searchBar.oninput = () => pokeCollection.search(searchBar.value);
+};
+
+const main = function() {
+  const scrollHandler = new handleScroll(showCategoryPanel, hideCategoryPanel);
+  const pokeCollection = new PokeCollection();
+  hookCategoryListeners(pokeCollection);
+  hookSearchListener(pokeCollection);
+  hookWindowListeners(scrollHandler);
+  hookPokeBoxListeners();
+};

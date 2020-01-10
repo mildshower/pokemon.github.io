@@ -189,8 +189,13 @@ nav::-webkit-scrollbar {
   cursor: pointer;
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+
+.highlighted {
+  color: rgb(63, 63, 63);
+  font-weight: 800;
 }
 
 @media (max-width: 600px) {
@@ -231,7 +236,7 @@ nav::-webkit-scrollbar {
     overflow: hidden;
   }
 
-  .typeImg{
+  .typeImg {
     width: 15px;
     margin: 0 0;
   }
